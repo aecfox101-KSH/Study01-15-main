@@ -26,9 +26,6 @@ public class EnemyKnockback : MonoBehaviour
             // 1. 넉백 시간 관리
             KnockbackTimer -= Time.deltaTime;
 
-            // 2. 실제 위치 이동 처리 (Transform 방식) = 현재 위치 + (속력 * 시간)
-            transform.position += (Vector3)KnockbackVelocity * Time.deltaTime;
-
             // 3. 타이머 종료 체크
             if (KnockbackTimer <= 0.0f)
             {
@@ -43,6 +40,11 @@ public class EnemyKnockback : MonoBehaviour
     public bool IsKnockbackActive()
     {
         return isKnockbackActive;
+    }
+
+    public Vector2 GetKnockbackVelocity()
+    {
+        return KnockbackVelocity;
     }
 
     // 넉백 발생 함수 (플레이어에게 맞았을 때 호출)

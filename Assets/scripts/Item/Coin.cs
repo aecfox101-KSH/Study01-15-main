@@ -22,11 +22,16 @@ public class Coin : MonoBehaviour
             AudioManager.instance.PlaySFX(1);
         }
 
-       /* if (coinSuond != null)
+        if(ParticleManager.instance !=null)
         {
-            coinSuond.Play();
-            Debug.Log("코인 사운드");
-        }*/
+            ParticleManager.instance.PlayFX(0, transform.position);
+        }
+
+        /* if (coinSuond != null)
+         {
+             coinSuond.Play();
+             Debug.Log("코인 사운드");
+         }*/
 
         Destroy(gameObject);
 

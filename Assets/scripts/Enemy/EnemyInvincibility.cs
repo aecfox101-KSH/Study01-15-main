@@ -39,10 +39,10 @@ public class EnemyInvincibility : MonoBehaviour
             InvincibleCoroutine = null;
         }
 
-        InvincibleCoroutine = StartCoroutine(lnvincibilityCoroutine());
+        InvincibleCoroutine = StartCoroutine(InvincibilityCoroutine());
     }
 
-    private IEnumerator lnvincibilityCoroutine() // 깜빡거림 or 시간 체크 동시 적용
+    private IEnumerator InvincibilityCoroutine() // 깜빡거림 or 시간 체크 동시 적용
     {
         isInvincible = true;
 

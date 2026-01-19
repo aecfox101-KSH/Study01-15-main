@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyContactDamge : MonoBehaviour
 {
-    public int Damage = 1;
+    public int damage = 1;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -19,7 +19,7 @@ public class EnemyContactDamge : MonoBehaviour
 
             if (playerHealth !=null)
             {
-                playerHealth.TakeDamage(Damage);
+                playerHealth.TakeDamage(damage);
                 Debug.Log("¶¨");
             }
 
@@ -27,8 +27,6 @@ public class EnemyContactDamge : MonoBehaviour
             {
                 inv.StartInvincibility();
             }
-
-
 
             PlayerKnockback knockback = collision.gameObject.GetComponent<PlayerKnockback>();
             if (knockback != null)

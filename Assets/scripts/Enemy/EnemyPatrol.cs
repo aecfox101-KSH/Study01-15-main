@@ -15,13 +15,17 @@ public class EnemyPatrol : MonoBehaviour
 
     public Animator animator;
 
-    private EnemyKnockback enemyKnockback;
+    [SerializeField]
+    private Rigidbody2D rb;
+
+    [SerializeField]
+    private PlayerKnockback knockback;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() // 게임이 시작될 때 한번 실행
     {
         moveRight = true; // 처음 시작할 때 이동 방향을 오른쪽으로 설정
-        enemyKnockback = GetComponent<EnemyKnockback>();
+        
     }
 
     // Update is called once per frame
@@ -33,6 +37,11 @@ public class EnemyPatrol : MonoBehaviour
     //  -이동기능-
     void Move()
     {
+        if (knockback != null && knockback.IsKnockbackActive() == true)
+        {
+            return;
+        }
+
         float directionX = 0.0f;
 
         // 방향에 따라 x축 이동 값을 설정
@@ -62,6 +71,20 @@ public class EnemyPatrol : MonoBehaviour
         if(animator != null )
         {
             animator.SetBool("move", true);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (knockback != null)
+        {
+            bool isKnockback = knockback.IsKnockbackActive();
+
+            if (isKnockback == true)
+            {
+                Vector2 kbVelocity = knockback.GetKnockbackVelocity();
+                rb.linearVelocity = kbVelocity;
+            }
         }
     }
 

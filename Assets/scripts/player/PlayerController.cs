@@ -15,9 +15,6 @@ public class PlayerContraller : MonoBehaviour
     [SerializeField]
     private PlayerKnockback knockback; // 외부 스크립트(넉백 기능)와의 상호작용을 위한 변수
 
-    [SerializeField]
-    private AudioSource jumpSound;
-
     private bool isGrounded = false; // 캐릭터가 현재 지면에 닿아 있는지 확인하는 상태 변수
 
     private float moveInput = 0.0f; // 사용자의 좌우 키 입력값(-1, 0, 1)을 담는 변수
@@ -105,9 +102,9 @@ public class PlayerContraller : MonoBehaviour
 
             Debug.Log("점프 실행!!");
 
-            if(jumpSound != null)
+            if(AudioManager.instance != null)  // instance = 객체를 불러오는 행위
             {
-                jumpSound.Play();
+                AudioManager.instance.PlaySFX(0);
                 Debug.Log("점프 사운드 재생!!");
             }
 

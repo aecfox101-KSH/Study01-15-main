@@ -1,14 +1,13 @@
 using UnityEngine;
 
+/// <summary>
+/// 플레이어의 기본 공격을 담당하는 클래스
+/// 공격 키 입력을 감지.
+/// 공격 쿨타임 관리.
+/// 공격 애니메이션 재생.
+/// </summary>
 public class PlayerCombat : MonoBehaviour
 {
-    /// <summary>
-    /// 플레이어의 기본 공격을 담당하는 클래스
-    /// 공격 키 입력을 감지.
-    /// 공격 쿨타임 관리.
-    /// 공격 애니메이션 재생.
-    /// </summary>
-
     [Tooltip("공격 입력 키 지정 변수")] //인스펙터 창의 설명, [Header]
     public KeyCode attackKey = KeyCode.J; // 공격 입력 키 지정
 
@@ -47,7 +46,7 @@ public class PlayerCombat : MonoBehaviour
     {
         if (attackTimer > 0.0f)
         {
-            attackTimer = attackTimer - Time.deltaTime; // 매 프레임 값을 뺌. 0보다 작보다 같은 값이 될시 공격이 가능하다는 상태 확인.
+            attackTimer -= Time.deltaTime; // 매 프레임 값을 뺌. 0보다 작보다 같은 값이 될시 공격이 가능하다는 상태 확인.
             if (attackTimer <= 0.0f)
             {
                 attackTimer = 0.0f;
@@ -96,13 +95,33 @@ public class PlayerCombat : MonoBehaviour
         Collider2D[] hit = Physics2D.OverlapCircleAll(center, attackRange, targetLayer); // 범위 내 적 탐색 로직, center 위치에서 attackRange 반지름만큼의 가상의 원을 그려서, 그 안에 들어온 모든 **Collider2D(충돌체)**를 배열 형태로 가져오는 것
         // targetLayer 만 지정해주기 위함.
 
-        for (int i = 0; i < hit.Length; i++) // 데미지 입히는 반복문
+        for (int i = 0; i < hit.Length; ++i) // 데미지 입히는 반복문
         {
             EnemyHealth health=  hit[i].GetComponent<EnemyHealth>();
             if (health != null)
             {
                 health.TakeDamage(attackDamage);
             }
+
+            ApplyKnockback(hit[i]);
+        }
+    }
+
+    void ApplyKnockback(Collider2D hit)
+    {
+        PlayerKnockback knockback = hit.gameObject.GetComponent<PlayerKnockback>();
+        if (knockback != null)
+        {
+            Vector2 direction = Vector2.right;
+
+            float diffX = hit.transform.position.x - transform.position.x;
+
+            if (diffX < 0.0f)
+            {
+                direction = Vector2.left;
+            }
+
+            knockback.ApplyKnockback(direction);
         }
     }
 
