@@ -1529,12 +1529,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 527056987}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.6257768, y: 0.5447664, z: 0.034766186}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 528635294}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &527056990
 MonoBehaviour:
@@ -1583,6 +1583,7 @@ Transform:
   m_Children:
   - {fileID: 1595071468}
   - {fileID: 1931085523}
+  - {fileID: 527056989}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &566842793
@@ -2242,6 +2243,13 @@ MonoBehaviour:
   mainSlider: {fileID: 1986927303}
   bgmSlider: {fileID: 1173582931}
   sfxSlider: {fileID: 1249511419}
+  mainKey: Opt_MainVolume01
+  bgmKey: Opt_BgmVolume01
+  sfxKey: Opt_SfxVolume01
+  defaultMain: 1
+  defaultBgm: 1
+  defaultSfx: 1
+  useJson: 1
 --- !u!1 &826758436
 GameObject:
   m_ObjectHideFlags: 0
@@ -3443,7 +3451,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 337}
+  m_AnchoredPosition: {x: 0, y: 350}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1173582931
@@ -3493,7 +3501,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.486
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -3609,7 +3617,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.295
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -5996,7 +6004,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.614
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -6220,6 +6228,5 @@ SceneRoots:
   - {fileID: 528635294}
   - {fileID: 1738757254}
   - {fileID: 1674936450}
-  - {fileID: 527056989}
   - {fileID: 598639950}
   - {fileID: 1606076494}
