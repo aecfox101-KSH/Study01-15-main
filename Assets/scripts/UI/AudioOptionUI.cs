@@ -81,20 +81,28 @@ public class AudioOptionUI : MonoBehaviour
     {
         ApplyMixerVolume(mainVolumeParam, value);
 
-        if(saveType == SaveType.Json)
+        switch (saveType)
         {
-            data.mainVolume01 = value;
-            Storage.Save(data);
-        }
-        else if(saveType == SaveType.Binary)
-        {
-            data.mainVolume01 = value;
-            storageBin.Save(data);
-        }
+            case SaveType.Json:
+                {
+                    data.mainVolume01 = value;
+                    Storage.Save(data);
+                }
 
-        else
-        {
-            PlayerPrefs.SetFloat(mainKey, value);
+                break;
+
+            case SaveType.Binary:
+                {
+                    data.mainVolume01 = value;
+                    storageBin.Save(data);
+                }
+                break;
+
+            default:
+                {
+                    PlayerPrefs.SetFloat(mainKey, value); 
+                }
+                 break;
         }
     }
 
@@ -102,40 +110,55 @@ public class AudioOptionUI : MonoBehaviour
     {
         ApplyMixerVolume(bgmVolumeParam, value);
 
-        if (saveType == SaveType.Json)
+        switch (saveType)
         {
-            data.bgmVolume01 = value;
-            Storage.Save(data);
-        }
-        else if (saveType == SaveType.Binary)
-        {
-            data.bgmVolume01 = value;
-            storageBin.Save(data);
-        }
-        else
-        {
-            PlayerPrefs.SetFloat(bgmKey, value);
-        }
+            case SaveType.Json:
+                {
+                    data.bgmVolume01 = value;
+                    Storage.Save(data);
+                }
+                break;
 
+            case SaveType.Binary:
+                {
+                    data.bgmVolume01 = value;
+                    storageBin.Save(data);
+                }
+                break;
+
+            default:
+                {
+                   PlayerPrefs.SetFloat(bgmKey, value);
+                }
+                break;
+        }
     }
 
     public void OnSFXSlider(float value)
     {
         ApplyMixerVolume(sfxVolumeParam, value);
 
-        if (saveType == SaveType.Json)
+        switch(saveType)
         {
-            data.sfxVolume01 = value;
-            Storage.Save(data);
-        }
-        else if (saveType == SaveType.Binary)
-        {
-            data.sfxVolume01 = value;
-            storageBin.Save(data);
-        }
-        else
-        {
-            PlayerPrefs.SetFloat(sfxKey, value);
+            case SaveType.Json:
+                {
+                    data.sfxVolume01 = value;
+                    Storage.Save(data);
+                }
+                break;
+
+            case SaveType.Binary:
+                {
+                    data.sfxVolume01 = value;
+                    storageBin.Save(data);
+                }
+                break;
+
+            default:
+                {
+                   PlayerPrefs.SetFloat(sfxKey, value);
+                }
+                break;
         }
     }
 
@@ -166,50 +189,55 @@ public class AudioOptionUI : MonoBehaviour
         float bgm01 = 0.0f;
         float sfx01 = 0.0f;
 
-        if (saveType == SaveType.Json)
+
+        switch(saveType)
         {
-            data = Storage.Load();
+            case SaveType.Json:
+                {
+                    data = Storage.Load();
 
-            // 데이터를 불러오지 못했을 경우 기본 값으로 세팅해준다.
-            if (data == null)
-            {
-                data = new OptionData();
-                data.mainVolume01 = defaultMain;
-                data.bgmVolume01 = defaultBgm;
-                data.sfxVolume01 = defaultSfx;
-            }
+                    // 데이터를 불러오지 못했을 경우 기본 값으로 세팅해준다.
+                    if (data == null)
+                    {
+                        data = new OptionData();
+                        data.mainVolume01 = defaultMain;
+                        data.bgmVolume01 = defaultBgm;
+                        data.sfxVolume01 = defaultSfx;
+                    }
 
-            main01 = data.mainVolume01;
-            bgm01 = data.bgmVolume01;
-            sfx01 = data.sfxVolume01;
+                    main01 = data.mainVolume01;
+                    bgm01 = data.bgmVolume01;
+                    sfx01 = data.sfxVolume01;
+                }
+                break;
+
+            case SaveType.Binary:
+                {
+                    data = storageBin.Load();
+                    // 데이터를 불러오지 못했을 경우 기본 값으로 세팅해준다.
+                    if (data == null)
+                    {
+                        data = new OptionData();
+                        data.mainVolume01 = defaultMain;
+                        data.bgmVolume01 = defaultBgm;
+                        data.sfxVolume01 = defaultSfx;
+                    }
+                    main01 = data.mainVolume01;
+                    bgm01 = data.bgmVolume01;
+                    sfx01 = data.sfxVolume01;
+                }
+                break;
+
+            default:
+                {
+                    // 기기에 저장되어 있는 메인 볼륨 값 데이터를 불러온다.
+                    // 만약 불러올 데이터가 없으면 기본 값으로 defaultMain을 대입한다.
+                    main01 = PlayerPrefs.GetFloat(mainKey, defaultMain);
+                    bgm01 = PlayerPrefs.GetFloat(bgmKey, defaultBgm);
+                    sfx01 = PlayerPrefs.GetFloat(sfxKey, defaultSfx);
+                }
+                break;
         }
-        else if(saveType == SaveType.Binary)
-        {
-            data = storageBin.Load();
-
-            // 데이터를 불러오지 못했을 경우 기본 값으로 세팅해준다.
-            if (data == null)
-            {
-                data = new OptionData();
-                data.mainVolume01 = defaultMain;
-                data.bgmVolume01 = defaultBgm;
-                data.sfxVolume01 = defaultSfx;
-            }
-
-            main01 = data.mainVolume01;
-            bgm01 = data.bgmVolume01;
-            sfx01 = data.sfxVolume01;
-        }
-
-        else
-        {
-            // 기기에 저장되어 있는 메인 볼륨 값 데이터를 불러온다.
-            // 만약 불러올 데이터가 없으면 기본 값으로 defaultMain을 대입한다.
-            main01 = PlayerPrefs.GetFloat(mainKey, defaultMain);
-            bgm01 = PlayerPrefs.GetFloat(bgmKey, defaultBgm);
-            sfx01 = PlayerPrefs.GetFloat(sfxKey, defaultSfx);
-        }
-
             mainSlider.value = main01;
             bgmSlider.value = bgm01;
             sfxSlider.value = sfx01;
