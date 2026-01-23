@@ -14,6 +14,21 @@ public class Projectile : MonoBehaviour
     private float lifeTimer = 0.0f; // 총알 수명 타이머
     private Vector2 direction = Vector2.right; // 총알 이동 방향
 
+    private ProjectilePool pool = null; // 총알 풀 스크립트 참조
+
+    /// <summary>
+    /// 재활용을 위해 활성화 시 타이머 초기화.
+    /// </summary>
+    private void OnEnable()
+    {
+        lifeTimer = 0.0f;
+    }
+
+    public void SetPool(ProjectilePool projectilePool)
+    {
+        pool = projectilePool;
+    }
+
     public void SetDirection(Vector2 dir)
     {
         /*순수한 방향 정보만 가지고 있는 벡터는 크기가 1이어야한다. 
@@ -42,13 +57,14 @@ public class Projectile : MonoBehaviour
         transform.position = new Vector3(newX, newY, pos.z);
     }
 
-    // 자동 파괴 시간 처리 
+    // 자동 파괴 시간 처리
     void UpdateLifetime()
     {
-        lifeTime += Time.deltaTime;
+        lifeTimer += Time.deltaTime;
         if (lifeTimer >= lifeTime)
         {
-            Destroy(gameObject);
+            // Destroy(gameObject);
+            ReturnToPool();
         }
     }
 
@@ -57,7 +73,7 @@ public class Projectile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // 충돌한 오브젝트가 적인지 확인
-        if (collision.gameObject.CompareTag("Enemy") == false)
+        if (collision.gameObject.CompareTag("Player") == true)
         {
             return;
         }
@@ -73,14 +89,38 @@ public class Projectile : MonoBehaviour
         {
             Vector2 knockbackDirection = direction; // 총알의 이동 방향을 넉백 방향으로 사용
             playerKnockback.ApplyKnockback(knockbackDirection); // 적에게 넉백 적용
-        }    
+        }
 
-        Destroy(gameObject); // 총알 파괴
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(1);
+        }
+
+        if (ParticleManager.instance != null)
+        {
+            ParticleManager.instance.PlayFX(1, transform.position);
+        }
+
+        // Destroy(gameObject); // 총알 파괴
+        ReturnToPool();
     }
     // Update is called once per frame
     void Update()
     {
         Move();
         UpdateLifetime();
+    }
+    /// <summary>
+    /// 사용이 끝난 총알을 반환.
+    /// </summary>
+    void ReturnToPool()
+    {
+        if(pool != null)
+        {
+            pool.Return(this);
+            return;
+        }
+
+        Destroy(gameObject);
     }
 }

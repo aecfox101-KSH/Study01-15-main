@@ -16,19 +16,6 @@ public class ScoreManager : MonoBehaviour
         // 클래스 자신으로 초기화하여 외부에서 사용할 수 있게 해줌.
         instance = this; // this = 클래스 자신을 의미함.
     }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     /// <summary>
     /// 점수 증가 시키는 함수
     /// </summary>
