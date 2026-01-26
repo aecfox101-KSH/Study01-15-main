@@ -1,4 +1,9 @@
 using UnityEngine;
+public enum AudioType
+{
+    Jump = 0,
+    GainCoin = 1
+}
 
 public class AudioManager : MonoBehaviour
 {
@@ -20,13 +25,13 @@ public class AudioManager : MonoBehaviour
         instance = null;
     }
 
-    public void  PlaySFX(int index)
+    public void  PlaySFX(AudioType index)
     {
-        if (index <  0 || index >= clips.Length)
+        if ((int)index <  0 || (int)index >= clips.Length)
         {
             return;
         }
-        audioSFX.clip = clips[index];
+        audioSFX.clip = clips[(int)index];
         audioSFX.Play();
        
     }

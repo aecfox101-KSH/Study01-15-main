@@ -93,12 +93,12 @@ public class Projectile : MonoBehaviour
 
         if (AudioManager.instance != null)
         {
-            AudioManager.instance.PlaySFX(1);
+            AudioManager.instance.PlaySFX(AudioType.GainCoin);
         }
 
         if (ParticleManager.instance != null)
         {
-            ParticleManager.instance.PlayFX(1, transform.position);
+            ParticleManager.instance.PlayFX(ParticleType.fire, transform.position);
         }
 
         // Destroy(gameObject); // 총알 파괴

@@ -104,7 +104,7 @@ public class PlayerContraller : MonoBehaviour
 
             if(AudioManager.instance != null)  // instance = 객체를 불러오는 행위
             {
-                AudioManager.instance.PlaySFX(0);
+                AudioManager.instance.PlaySFX(AudioType.Jump);
                 Debug.Log("점프 사운드 재생!!");
             }
 

@@ -1,5 +1,11 @@
 using UnityEngine;
 
+public enum ParticleType
+{
+    coin = 0,
+    fire= 1
+}
+
 public class ParticleManager : MonoBehaviour
 {
     // 싱글톤.
@@ -22,14 +28,14 @@ public class ParticleManager : MonoBehaviour
     /// </summary>
     /// <param name="index">재생할 파티클의 배열 인덱스</param>
     /// <param name="pos">재생할 파티클의 위치</param>
-    public void PlayFX(int index, Vector3 pos)
+    public void PlayFX(ParticleType index, Vector3 pos)
     {
-        if (index < 0 || index >= particles.Length)
+        if ((int)index < 0 || (int)index >= particles.Length)
         {
             return;
         }
 
-        GameObject go = Instantiate(particles[index].gameObject, pos, Quaternion.identity);
+        GameObject go = Instantiate(particles[(int)index].gameObject, pos, Quaternion.identity);
         if (go != null)
         {
             // 파티클의 자식 오브젝트로 붙어있는 파티클 시스템들을 모두 찾아서 재생.

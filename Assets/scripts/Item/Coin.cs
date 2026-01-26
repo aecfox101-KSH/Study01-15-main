@@ -19,12 +19,12 @@ public class Coin : MonoBehaviour
 
         if(AudioManager.instance != null)
         {
-            AudioManager.instance.PlaySFX(1);
+            AudioManager.instance.PlaySFX(AudioType.GainCoin);
         }
 
         if(ParticleManager.instance !=null)
         {
-            ParticleManager.instance.PlayFX(0, transform.position);
+            ParticleManager.instance.PlayFX(ParticleType.coin, transform.position);
         }
 
         /* if (coinSuond != null)
