@@ -60,7 +60,7 @@ public class GoalRequirementUI : MonoBehaviour
         // 다음 프레임 까지 대기하겠다.
         // yield return null;
 
-        messageText.gameObject.SetActive(false );
+        messageText.gameObject.SetActive(false);
 
         currentCoroutine = null;
     }
