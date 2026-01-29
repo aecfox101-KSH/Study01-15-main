@@ -4,7 +4,6 @@ using UnityEngine;
 /// 현재 스테이지가 클리어 되었는지를 관리
 /// </summary>
 
-
 public class GameStateManager : MonoBehaviour
 {
     public static GameStateManager instance;
@@ -13,6 +12,11 @@ public class GameStateManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+        if(SceneTransition.Instance != null )
+        {
+            SceneTransition.Instance.FadeIn();
+        }
     }
 
     public void SetStageClear()
