@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System;
 
 public class SceneTransition : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class SceneTransition : MonoBehaviour
     private Image fadeImage;
 
     public static SceneTransition Instance; // 싱글톤 
+
+    public event Action FadeOutEvent = null;
+    public event Action FadeInEvent = null;
+    
 
     private void Awake()
     {
@@ -18,9 +23,9 @@ public class SceneTransition : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void LoadNextScene(string nextsceneName)
+    public void StartFadeOut()
     {
-        StartCoroutine(CoFadeOut(nextsceneName)); // 코루틴 함수 호출 방법
+        StartCoroutine(FadeOut()); // 코루틴 함수 호출 방법
         
     }
 
@@ -45,11 +50,16 @@ public class SceneTransition : MonoBehaviour
             fadeImage.color = color;
             yield return null;
         }
+
+        if (FadeInEvent != null)
+        {
+            FadeInEvent.Invoke();
+            FadeInEvent = null;
+        }
      
     }
 
-
-    IEnumerator CoFadeOut(string nextSceneName) // 코루틴
+    IEnumerator FadeOut() // 코루틴
     {
         fadeImage.gameObject.SetActive(true);
 
@@ -68,7 +78,14 @@ public class SceneTransition : MonoBehaviour
             yield return null; // 코루틴 함수 쓸때 지정한 시간만큼 처리후 대기
         }
 
-        SceneManager.LoadScene(nextSceneName);
+        //SceneManager.LoadScene(nextSceneName);
+
+        // 등록된 이벤트 함수가 있을 경우 호출.
+        if(FadeOutEvent != null)
+        {
+            FadeOutEvent.Invoke();
+            FadeOutEvent = null;
+        }
         
     }
 }
