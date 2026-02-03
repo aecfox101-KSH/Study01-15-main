@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerContraller : MonoBehaviour
@@ -21,10 +22,22 @@ public class PlayerContraller : MonoBehaviour
 
     private bool jumpRequested = false; // 점프 입력을 받았는지 저장하는 일시적 변수
 
+    [Header("조작 제어")]
+    public bool canControl = true; // 외부(매니저)에서 제어할 수 있도록 public으로 선언
+
 
     // 매 프레임(초당 약 60회 이상)마다 호출되는 함수
     void Update()
     {
+        // 1. 조작이 불가능한 상태라면 입력을 모두 0으로 만들고 리턴
+        if (!canControl)
+        {
+            moveInput = 0f;
+            jumpRequested = false;
+            UpdateAnimation(); // 정지 애니메이션을 위해 호출은 해줍니다.
+            return;
+        }
+
         // 1. 매 프레임 사용자의 입력과 상태 변화를 체크함
         HandleMoveInput();   // 좌우 입력 감지
         HandleJumpInput();   // 점프 입력 감지
@@ -51,6 +64,14 @@ public class PlayerContraller : MonoBehaviour
                 rb.linearVelocity = kbVelocity;
                 return;
             }
+        }
+
+        // 2. 조작 불가능 상태일 때 물리 멈추기
+        if (!canControl)
+        {
+            // 좌우 이동은 멈추고, 중력(수직 속도)만 유지하거나 아예 0으로 만듦
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            return;
         }
 
         // 넉백 상태가 아닐 때만 실제 이동 및 점프 물리 로직 실행
