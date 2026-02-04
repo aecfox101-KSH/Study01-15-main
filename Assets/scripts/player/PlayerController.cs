@@ -16,6 +16,15 @@ public class PlayerContraller : MonoBehaviour
     [SerializeField]
     private PlayerKnockback knockback; // 외부 스크립트(넉백 기능)와의 상호작용을 위한 변수
 
+    [SerializeField]
+    private Transform groundCheck;
+
+    [SerializeField]
+    private float rayLength = 0.25f;// 광선의 길이
+
+    [SerializeField]
+    private LayerMask groundLayer;
+
     private bool isGrounded = false; // 캐릭터가 현재 지면에 닿아 있는지 확인하는 상태 변수
 
     private float moveInput = 0.0f; // 사용자의 좌우 키 입력값(-1, 0, 1)을 담는 변수
@@ -37,6 +46,8 @@ public class PlayerContraller : MonoBehaviour
             UpdateAnimation(); // 정지 애니메이션을 위해 호출은 해줍니다.
             return;
         }
+
+        isGrounded = IsGrounded();
 
         // 1. 매 프레임 사용자의 입력과 상태 변화를 체크함
         HandleMoveInput();   // 좌우 입력 감지
@@ -134,7 +145,7 @@ public class PlayerContraller : MonoBehaviour
         // 변경된 최종 속도 값을 Rigidbody에 다시 적용
         rb.linearVelocity = velocity;
     }
-
+    /*
     // 다른 콜라이더와 물리적으로 부딪히기 시작할 때 유니티가 자동 호출
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -153,7 +164,7 @@ public class PlayerContraller : MonoBehaviour
         {
             isGrounded = false;
         }
-    }
+    }*/
 
     // 입력 방향에 따라 캐릭터의 이미지를 반전시키는 함수
     void UpdateDirection()
@@ -196,5 +207,20 @@ public class PlayerContraller : MonoBehaviour
         // 애니메이터 컨트롤러에 정의된 "Move"와 "isGrounded" 변수에 값 전달
         animator.SetBool("Move", move);
         animator.SetBool("isGrounded", isGrounded);
+    }
+
+    bool IsGrounded()
+    {
+        // 광선을 쏠 위치. 광선을 쏠 방향. 광선의 길이값. 광선에 명중되었는지 체크할 대상에 포함시킬 오브젝트의 유형.
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2(groundCheck.position.x, groundCheck.position.y), Vector2.down,
+            rayLength, groundLayer);
+        if(hit.collider != null)
+        {
+            return true;
+        }
+
+        return false;
+
+
     }
 }

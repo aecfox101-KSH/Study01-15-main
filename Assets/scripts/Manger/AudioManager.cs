@@ -3,7 +3,8 @@ public enum AudioType
 {
     Jump = 0,
     GainCoin = 1,
-    BGM_Main = 2
+    BGM_Main = 2,
+    BGM_Stage2 = 3
 }
 
 public class AudioManager : MonoBehaviour
@@ -21,13 +22,20 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); 
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
-
-    private void OnDestroy()
+    /*private void OnDestroy()
     {
         instance = null;
-    }
+    }*/
 
     public void  PlaySFX(AudioType index)
     {

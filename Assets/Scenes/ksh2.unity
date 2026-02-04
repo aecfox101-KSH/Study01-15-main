@@ -196,7 +196,7 @@ SpriteRenderer:
   m_SortingLayerID: -6813259
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9b8e709e716a1ed4da1cf5eebeef263f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a3b974fba1a5fa94f9685dfccfef4b17, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1568,7 +1568,7 @@ SpriteRenderer:
   m_SortingLayerID: 979922427
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e71d9948d4d535740be31724651bd07a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d61d5891b4beb8b4e9e2296da6672e68, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3502,7 +3502,7 @@ GameObject:
   - component: {fileID: 690942552}
   - component: {fileID: 690942551}
   m_Layer: 5
-  m_Name: Chapter1panel
+  m_Name: Chapter2panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4368,7 +4368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stagePanel: {fileID: 690942549}
-  stageBGM: 2
+  stageBGM: 3
   displayTime: 2.5
 --- !u!1 &899615625
 GameObject:
@@ -5993,7 +5993,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Chapter 1 \n\uC124\uC0B0"
+  m_text: "Chapter 2 \n\uC815\uAE00"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cd9a0ad487bdf754f98adb025db4247c, type: 2}
   m_sharedMaterial: {fileID: -3540666366481617193, guid: cd9a0ad487bdf754f98adb025db4247c, type: 2}
@@ -7402,7 +7402,7 @@ SpriteRenderer:
   m_SortingLayerID: -6813259
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9b8e709e716a1ed4da1cf5eebeef263f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a3b974fba1a5fa94f9685dfccfef4b17, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -7596,7 +7596,7 @@ SpriteRenderer:
   m_SortingLayerID: 979922427
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e71d9948d4d535740be31724651bd07a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d61d5891b4beb8b4e9e2296da6672e68, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -7738,7 +7738,7 @@ SpriteRenderer:
   m_SortingLayerID: -6813259
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9b8e709e716a1ed4da1cf5eebeef263f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a3b974fba1a5fa94f9685dfccfef4b17, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -8662,7 +8662,7 @@ SpriteRenderer:
   m_SortingLayerID: 979922427
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e71d9948d4d535740be31724651bd07a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d61d5891b4beb8b4e9e2296da6672e68, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -8977,7 +8977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1717f028b9146434b83a6f980195039f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentStage: 1
+  currentStage: 2
 --- !u!1 &1935209524
 GameObject:
   m_ObjectHideFlags: 0
